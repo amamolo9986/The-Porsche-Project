@@ -10,4 +10,5 @@ public class SpringSecurityJwtDemoApplication {
 		SpringApplication.run(SpringSecurityJwtDemoApplication.class, args);
 	}
 	
+	//test
 }
