@@ -42,7 +42,7 @@
 
 <div class="container">
   <h2>Login Form</h2>
-  <form th:object="${user}" th:action="@{/signin}" method="post" enctype="application/x-www-form-urlencoded" id="loginForm">
+  <form th:object="${user}" th:action="@{/login}" method="post" enctype="application/x-www-form-urlencoded" id="loginForm">
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email *" th:field="*{email}" name="email" class="required" required>
