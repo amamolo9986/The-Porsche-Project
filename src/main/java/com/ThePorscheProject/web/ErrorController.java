@@ -15,6 +15,6 @@ public class ErrorController {
 	@GetMapping("/userExists")
 	public String getUserExistsMessage () {
 		return "userExists";
-	}
+	} 
 	
 }
