@@ -99,7 +99,7 @@ public class SecurityConfig {
 									logger.info("Access Cookie: " + accessTokenCookie.getValue());
 									logger.info("Refresh Cookie: " + refreshTokenCookie.getValue());
 									logger.info("Role for " + user.getUsername() + " is: "+ user.authority(accessToken).toString());
-//					    	
+					    	
 									response.addCookie(accessTokenCookie);
 									response.addCookie(refreshTokenCookie);
 									response.sendRedirect("/homepage");
