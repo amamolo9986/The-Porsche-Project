@@ -139,4 +139,11 @@ public class User implements UserDetails {
         return this;
     }
 
+	@Override
+	public String toString() {
+		return "User [email=" + email +  "]";
+	}
+    
+    
+
 }

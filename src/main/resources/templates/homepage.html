@@ -15,6 +15,15 @@
     <body>
         <h1>Homepage</h1>
 
+        <div>
+            <a th:href="@{/users/profile}">
+                <button type="submit">Profile</button>
+            </a>
+            <!-- <div th:if="${#authorization.isUserInRole('ADMIN')}">
+                <a th:href="@{/admin/dashboard}" >View All Users</a>
+            </div> -->
+
+        </div><br/>
         <form action="/logout" method="post">
             <button type="submit">Logout</button>
         </form>
