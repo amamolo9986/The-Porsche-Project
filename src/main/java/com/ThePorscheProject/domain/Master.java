@@ -19,6 +19,7 @@ public class Master {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String seriesName;
+	private String seriesCategory;
 	private String model;
 	private Integer startYear;
 	private Integer endYear;
@@ -29,23 +30,24 @@ public class Master {
 	@ElementCollection
 	@CollectionTable(name = "porsche_categories", joinColumns = @JoinColumn(name = "porsche_id"))
 	@Column(name = "category")
-	private Set<String> categories;
+	private Set<String> labels;
 
 	public Master() {
 
 	}
 
-	public Master(Integer id, String seriesName, String model, Integer startYear, Integer endYear, String description,
-			String photo, Set<String> categories) {
+	public Master(Integer id, String seriesName, String seriesCategory, String model, Integer startYear,
+			Integer endYear, String description, String photo, Set<String> labels) {
 		super();
 		this.id = id;
 		this.seriesName = seriesName;
+		this.seriesCategory = seriesCategory;
 		this.model = model;
 		this.startYear = startYear;
 		this.endYear = endYear;
 		this.description = description;
 		this.photo = photo;
-		this.categories = categories;
+		this.labels = labels;
 	}
 
 	public Integer getId() {
@@ -62,6 +64,14 @@ public class Master {
 
 	public void setSeriesName(String seriesName) {
 		this.seriesName = seriesName;
+	}
+
+	public String getSeriesCategory() {
+		return seriesCategory;
+	}
+
+	public void setSeriesCategory(String seriesCategory) {
+		this.seriesCategory = seriesCategory;
 	}
 
 	public String getModel() {
@@ -104,19 +114,19 @@ public class Master {
 		this.photo = photo;
 	}
 
-	public Set<String> getCategories() {
-		return categories;
+	public Set<String> getLabels() {
+		return labels;
 	}
 
-	public void setCategories(Set<String> categories) {
-		this.categories = categories;
+	public void setLabels(Set<String> labels) {
+		this.labels = labels;
 	}
 
 	@Override
 	public String toString() {
-		return "Master [id=" + id + ", seriesName=" + seriesName + ", model=" + model + ", startYear=" + startYear
-				+ ", endYear=" + endYear + ", description=" + description + ", photo=" + photo + ", categories="
-				+ categories + "]";
+		return "Master [id=" + id + ", seriesName=" + seriesName + ", seriesCategory=" + seriesCategory + ", model="
+				+ model + ", startYear=" + startYear + ", endYear=" + endYear + ", description=" + description
+				+ ", photo=" + photo + ", labels=" + labels + "]";
 	}
 	
 }
