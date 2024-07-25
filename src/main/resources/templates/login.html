@@ -9,6 +9,7 @@
 
 <div class="container">
   <h2>Login Form</h2>
+
   <form th:object="${user}" th:action="@{/login}" method="post" enctype="application/x-www-form-urlencoded" id="loginForm">
 
     <label for="email"><b>Email</b></label>
@@ -19,6 +20,10 @@
 
     <button type="submit">Log in</button>
   </form>
+
+  <a th:href="@{/register}">
+    <button type="submit">Register</button>
+  </a>
 </div>
 
 </body>
