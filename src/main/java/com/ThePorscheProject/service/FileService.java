@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.ThePorscheProject.domain.Master;
 import com.ThePorscheProject.domain.ModelDescription;
 import com.ThePorscheProject.domain.SeriesBanner;
 import com.ThePorscheProject.repository.MasterRepository;
@@ -88,7 +89,7 @@ public class FileService {
 	}
 	
 	public void readMasterFile() {
-		try (CSVReader csvReader = new CSVReader(new FileReader("SeriesBanner.csv"))) {
+		try (CSVReader csvReader = new CSVReader(new FileReader("Master.csv"))) {
 			List<String[]> records = csvReader.readAll();
 
 			if (!records.isEmpty()) {
@@ -99,12 +100,24 @@ public class FileService {
 			for (String[] record : records) {
 				Integer id = Integer.parseInt(record[0]);
 				String seriesName = record[1];
-				String photo = record[2];
-				SeriesBanner seriesBanner = new SeriesBanner();
-				seriesBanner.setId(id);
-				seriesBanner.setSeriesName(seriesName);
-				seriesBanner.setPhoto(photo);
-				seriesBannerRepo.save(seriesBanner);
+				String seriesCategory = record[2];
+				String model = record[3];
+				Integer startYear = Integer.parseInt(record[4]);
+				Integer endYear = Integer.parseInt(record[5]);
+				String description = record[6];
+				String photo = record[7];
+				String label = record[8];
+				Master master = new Master();
+				master.setId(id);
+				master.setSeriesName(seriesName);
+				master.setSeriesCategory(seriesCategory);
+				master.setModel(model);
+				master.setStartYear(startYear);
+				master.setEndYear(endYear);
+				master.setDescription(description);
+				master.setPhoto(photo);
+				master.setLabels(label);
+				masterRepo.save(master);
 			
 			}
 
