@@ -26,18 +26,14 @@ public class Master {
 	@Column(length = 1500)
 	private String description;
 	private String photo;
-	
-	@ElementCollection
-	@CollectionTable(name = "porsche_categories", joinColumns = @JoinColumn(name = "porsche_id"))
-	@Column(name = "category")
-	private Set<String> labels;
+	private String label;
 
 	public Master() {
 
 	}
 
 	public Master(Integer id, String seriesName, String seriesCategory, String model, Integer startYear,
-			Integer endYear, String description, String photo, Set<String> labels) {
+			Integer endYear, String description, String photo, String label) {
 		super();
 		this.id = id;
 		this.seriesName = seriesName;
@@ -47,7 +43,7 @@ public class Master {
 		this.endYear = endYear;
 		this.description = description;
 		this.photo = photo;
-		this.labels = labels;
+		this.label = label;
 	}
 
 	public Integer getId() {
@@ -114,19 +110,19 @@ public class Master {
 		this.photo = photo;
 	}
 
-	public Set<String> getLabels() {
-		return labels;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setLabels(Set<String> labels) {
-		this.labels = labels;
+	public void setLabels(String label) {
+		this.label = label;
 	}
 
 	@Override
 	public String toString() {
 		return "Master [id=" + id + ", seriesName=" + seriesName + ", seriesCategory=" + seriesCategory + ", model="
 				+ model + ", startYear=" + startYear + ", endYear=" + endYear + ", description=" + description
-				+ ", photo=" + photo + ", labels=" + labels + "]";
+				+ ", photo=" + photo + ", label=" + label + "]";
 	}
 	
 }

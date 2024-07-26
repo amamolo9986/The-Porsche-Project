@@ -25,7 +25,7 @@ public class SeriesController {
 	public ResponseEntity<String> processCsv() {
 		fileService.readBannerFile();
 		fileService.readDescriptionFile();
-//		fileService.readMasterFile();
+		fileService.readMasterFile();
 		return ResponseEntity.ok("CSV processing successful!");
 	}
 
