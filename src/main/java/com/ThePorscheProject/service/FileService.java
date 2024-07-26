@@ -2,7 +2,9 @@ package com.ThePorscheProject.service;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ import com.opencsv.exceptions.CsvException;
 
 @Service
 public class FileService {
-	
+
 	private SeriesBannerRepository seriesBannerRepo;
 	private ModelDescriptionRepository modelDescriptionRepo;
 	private MasterRepository masterRepo;
@@ -30,100 +32,62 @@ public class FileService {
 		this.masterRepo = masterRepo;
 	}
 
-
+	
+	private List<String[]> readCsvFile(String fileName) {
+		try (CSVReader csvReader = new CSVReader(new FileReader(fileName))) {
+			List<String[]> records = csvReader.readAll();
+			if (!records.isEmpty()) {
+				System.out.println("Skipping header: " + String.join(", ", records.get(0)));
+				records.remove(0);
+			}
+			return records;
+		} catch (IOException | CsvException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
+	}
 
 	public void readBannerFile() {
-		try (CSVReader csvReader = new CSVReader(new FileReader("SeriesBanner.csv"))) {
-			List<String[]> records = csvReader.readAll();
-
-			if (!records.isEmpty()) {
-				System.out.println("Skipping header: " + String.join(", ", records.get(0)));
-				records.remove(0);
-			}
-
-			for (String[] record : records) {
-				Integer id = Integer.parseInt(record[0]);
-				String seriesName = record[1];
-				String photo = record[2];
-				SeriesBanner seriesBanner = new SeriesBanner();
-				seriesBanner.setId(id);
-				seriesBanner.setSeriesName(seriesName);
-				seriesBanner.setPhoto(photo);
-				seriesBannerRepo.save(seriesBanner);
-			
-			}
-
-		} catch (IOException | CsvException e) {
-			e.printStackTrace();
-		}
+		List<String[]> records = readCsvFile("SeriesBanner.csv");
+		List<SeriesBanner> banners = records.stream().map(record -> {
+			SeriesBanner seriesBanner = new SeriesBanner();
+			seriesBanner.setId(Integer.parseInt(record[0]));
+			seriesBanner.setSeriesName(record[1]);
+			seriesBanner.setPhoto(record[2]);
+			return seriesBanner;
+		}).collect(Collectors.toList());
+		seriesBannerRepo.saveAll(banners);
 	}
-	
+
 	public void readDescriptionFile() {
-		try (CSVReader csvReader = new CSVReader(new FileReader("ModelDescriptions.csv"))) {
-			List<String[]> records = csvReader.readAll();
-
-			if (!records.isEmpty()) {
-				System.out.println("Skipping header: " + String.join(", ", records.get(0)));
-				records.remove(0);
-			}
-
-			for (String[] record : records) {
-				Integer id = Integer.parseInt(record[0]);
-				String seriesName = record[1];
-				String seriesCategory = record[2];	
-				String seriesDescription = record[3];
-				String photo = record[4];
-				ModelDescription modelDescription = new ModelDescription();
-				modelDescription.setId(id);
-				modelDescription.setSeriesName(seriesName);
-				modelDescription.setSeriesCategory(seriesCategory);
-				modelDescription.setDescription(seriesDescription);
-				modelDescription.setPhoto(photo);
-				modelDescriptionRepo.save(modelDescription);
-			
-			}
-
-		} catch (IOException | CsvException e) {
-			e.printStackTrace();
-		}
+		List<String[]> records = readCsvFile("ModelDescriptions.csv");
+		List<ModelDescription> descriptions = records.stream().map(record -> {
+			ModelDescription modelDescription = new ModelDescription();
+			modelDescription.setId(Integer.parseInt(record[0]));
+			modelDescription.setSeriesName(record[1]);
+			modelDescription.setSeriesCategory(record[2]);
+			modelDescription.setDescription(record[3]);
+			modelDescription.setPhoto(record[4]);
+			return modelDescription;
+		}).collect(Collectors.toList());
+		modelDescriptionRepo.saveAll(descriptions);
 	}
-	
+
 	public void readMasterFile() {
-		try (CSVReader csvReader = new CSVReader(new FileReader("Master.csv"))) {
-			List<String[]> records = csvReader.readAll();
-
-			if (!records.isEmpty()) {
-				System.out.println("Skipping header: " + String.join(", ", records.get(0)));
-				records.remove(0);
-			}
-
-			for (String[] record : records) {
-				Integer id = Integer.parseInt(record[0]);
-				String seriesName = record[1];
-				String seriesCategory = record[2];
-				String model = record[3];
-				Integer startYear = Integer.parseInt(record[4]);
-				Integer endYear = Integer.parseInt(record[5]);
-				String description = record[6];
-				String photo = record[7];
-				String label = record[8];
-				Master master = new Master();
-				master.setId(id);
-				master.setSeriesName(seriesName);
-				master.setSeriesCategory(seriesCategory);
-				master.setModel(model);
-				master.setStartYear(startYear);
-				master.setEndYear(endYear);
-				master.setDescription(description);
-				master.setPhoto(photo);
-				master.setLabels(label);
-				masterRepo.save(master);
-			
-			}
-
-		} catch (IOException | CsvException e) {
-			e.printStackTrace();
-		}
+		List<String[]> records = readCsvFile("Master.csv");
+		List<Master> masters = records.stream().map(record -> {
+			Master master = new Master();
+			master.setId(Integer.parseInt(record[0]));
+			master.setSeriesName(record[1]);
+			master.setSeriesCategory(record[2]);
+			master.setModel(record[3]);
+			master.setStartYear(Integer.parseInt(record[4]));
+			master.setEndYear(Integer.parseInt(record[5]));
+			master.setDescription(record[6]);
+			master.setPhoto(record[7]);
+			master.setLabels(record[8]);
+			return master;
+		}).collect(Collectors.toList());
+		masterRepo.saveAll(masters);
 	}
-
 }
