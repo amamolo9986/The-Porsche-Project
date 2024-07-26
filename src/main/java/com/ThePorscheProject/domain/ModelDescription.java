@@ -15,7 +15,7 @@ public class ModelDescription {
 	private Integer id;
 	private String seriesName;
 	private String seriesCategory;
-	@Column(length = 1500)
+	@Column(length = 3000)
 	private String description;
 	private String photo;
 	
