@@ -1,32 +1,29 @@
 package com.ThePorscheProject.web;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ThePorscheProject.service.FileService;
+import com.ThePorscheProject.service.SeriesBannerService;
 
 @Controller
 public class SeriesController {
 	
-	private FileService fileService;
+	private SeriesBannerService seriesBannerService;
 	
-	public SeriesController(FileService fileService) {
+
+	public SeriesController(SeriesBannerService seriesBannerService) {
 		super();
-		this.fileService = fileService;
+		this.seriesBannerService = seriesBannerService;
 	}
 
 	@GetMapping("/series")
-	public String getSeries() {
+	public String getSeries(ModelMap model) {
+		List<String> photos = seriesBannerService.getAllPhotos();
+		model.addAttribute("photos", photos);
 		return "series";
 	}
 	
-	@GetMapping("/process-csv")
-	public ResponseEntity<String> processCsv() {
-		fileService.readBannerFile();
-		fileService.readDescriptionFile();
-		fileService.readMasterFile();
-		return ResponseEntity.ok("CSV processing successful!");
-	}
-
 }

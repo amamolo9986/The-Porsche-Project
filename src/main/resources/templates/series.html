@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/series.css">
 <head>
     <title>Series</title>
 </head>
 <body>
     <h1>Classics by Series</h1>
+    
+    <div th:each="photo : ${photos}" class="image-container">
+        <img th:src="@{${photo}}" alt="Image" />
+    </div>
 
     <a th:href="@{/homepage}">
         <button type="submit">Back</button>
