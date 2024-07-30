@@ -21,8 +21,6 @@ public class UserController {
 		this.userServiceImpl = userServiceImpl;
 	}
 
-
-
 	@GetMapping("users/profile")
 	public String getUserProfile (ModelMap model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
