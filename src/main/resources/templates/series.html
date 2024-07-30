@@ -11,8 +11,10 @@
         <button type="submit">Back</button>
     </a>
     
-    <div th:each="photo : ${photos}" class="image-container">
-        <img th:src="@{${photo}}" alt="Image" />
+    <div th:each="seriesBanner : ${seriesBanners}" class="image-container">
+
+            <img th:src="@{${seriesBanner.photo}}" alt="Image" />
+
     </div>
 
 </body>

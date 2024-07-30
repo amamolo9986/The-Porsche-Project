@@ -1,24 +1,32 @@
 package com.ThePorscheProject.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.ThePorscheProject.domain.SeriesBanner;
 import com.ThePorscheProject.repository.SeriesBannerRepository;
 
 @Service
 public class SeriesBannerService {
 	
-	private SeriesBannerRepository seriesBannerRepository;
+	private SeriesBannerRepository seriesBannerRepo;
 
-	public SeriesBannerService(SeriesBannerRepository seriesBannerRepository) {
+	public SeriesBannerService(SeriesBannerRepository seriesBannerRepo) {
 		super();
-		this.seriesBannerRepository = seriesBannerRepository;
+		this.seriesBannerRepo = seriesBannerRepo;
 	}
 
-
-	public List<String> getAllPhotos() {
-		return seriesBannerRepository.findAllPhotos();
+	public SeriesBanner findBySeriesName(String seriesName) {
+		Optional<SeriesBanner> seriesOpt = seriesBannerRepo.findBySeriesName(seriesName);
+		return seriesOpt.orElse(null);
 	}
+
+	public List<SeriesBanner> getAllSeriesBanners() {
+		return seriesBannerRepo.findAll();
+	}
+
+	
 
 }
