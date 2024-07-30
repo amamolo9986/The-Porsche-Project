@@ -12,9 +12,9 @@
     </a>
     
     <div th:each="seriesBanner : ${seriesBanners}" class="image-container">
-
+        <a th:href="@{/series/{seriesName}(seriesName=${seriesBanner.seriesName})}">
             <img th:src="@{${seriesBanner.photo}}" alt="Image" />
-
+        </a>
     </div>
 
 </body>

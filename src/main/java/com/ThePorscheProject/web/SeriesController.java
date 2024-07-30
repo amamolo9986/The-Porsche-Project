@@ -34,9 +34,9 @@ public class SeriesController {
 	@GetMapping("/series/{seriesName}")
 	public String findBtSeriesName(ModelMap model, @PathVariable String seriesName) {
 		SeriesBanner seriesBanner = seriesBannerService.findBySeriesName(seriesName);
-		List<ModelDescription> categories = modelDescriptionSerice.findCategoriesBySeriesName(seriesName);
+		List<ModelDescription> modelDescriptions = modelDescriptionSerice.findModelDescriptionsBySeriesName(seriesName);
 		model.put("seriesBanner", seriesBanner);
-	    model.put("categories", categories);
+	    model.put("modelDescriptions", modelDescriptions);
 		return "seriesCategory";
 		}
 		

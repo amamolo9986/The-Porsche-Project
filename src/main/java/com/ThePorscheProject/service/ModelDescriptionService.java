@@ -17,7 +17,7 @@ public class ModelDescriptionService {
 		this.modelDescriptionRepo = modelDescriptionRepo;
 	}
 
-	public List<ModelDescription> findCategoriesBySeriesName(String seriesName) {
+	public List<ModelDescription> findModelDescriptionsBySeriesName(String seriesName) {
         return modelDescriptionRepo.findBySeriesName(seriesName);
     }
 
