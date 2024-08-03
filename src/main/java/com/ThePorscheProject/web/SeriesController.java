@@ -25,14 +25,14 @@ public class SeriesController {
 	}
 
 	@GetMapping("/series")
-	public String getSeries(ModelMap model) {
+	public String getSeriesBanners(ModelMap model) {
 		List<SeriesBanner> seriesBanners = seriesBannerService.getAllSeriesBanners();
 		model.put("seriesBanners", seriesBanners);
 		return "series";
 	}
 	
 	@GetMapping("/series/{seriesName}")
-	public String findBtSeriesName(ModelMap model, @PathVariable String seriesName) {
+	public String findBySeriesName(ModelMap model, @PathVariable String seriesName) {
 		SeriesBanner seriesBanner = seriesBannerService.findBySeriesName(seriesName);
 		List<ModelDescription> modelDescriptions = modelDescriptionSerice.findModelDescriptionsBySeriesName(seriesName);
 		model.put("seriesBanner", seriesBanner);
