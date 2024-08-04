@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Models</title>
+</head>
+<body>
+    <h1>[[${seriesCategory}]]</h1>
+
+    <div th:each="master : ${masters}">
+        <h2 th:text="${master.model}">Category Name</h2>
+        <p th:text="${master.description}">Category Description</p>
+        <img th:src="@{${master.photo}}" alt="Image" />
+    </div> 
+</body>
+</html>
