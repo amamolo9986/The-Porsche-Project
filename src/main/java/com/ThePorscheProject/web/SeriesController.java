@@ -50,14 +50,8 @@ public class SeriesController {
     public String findBySeriesCategory(ModelMap model, @PathVariable String seriesName, @PathVariable String seriesCategory) {
 		List<Master> masters = masterService.findBySeriesCategory(seriesCategory);
 		SeriesBanner seriesBanner = seriesBannerService.findBySeriesName(seriesName);
-		Optional<ModelDescription> modelDescriptionOpt = modelDescriptionSerice.findModelDescriptionsBySeriesCategory(seriesCategory);
-		if (!modelDescriptionOpt.isPresent()) {
-	        return "redirect:/errorPage"; 
-	    }
-
 		model.put("masters", masters);
 		model.put("seriesBanner", seriesBanner);
-		model.put("modelDescription", modelDescriptionOpt.get());
 		model.put("seriesCategory", seriesCategory);
         return "seriesModel";
     }
