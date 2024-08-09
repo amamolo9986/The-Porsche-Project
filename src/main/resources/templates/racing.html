@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Racing</title>
@@ -11,6 +11,12 @@
     <a th:href="@{/homepage}">
         <button type="submit">Back</button>
     </a>
+
+    <div th:each="master : ${masters}">
+        <h2 th:text="${master.model}"></h2>
+        <p th:text="${master.description}"></p>
+        <img th:src="@{${master.photo}}" alt="Image" />
+    </div>
 </body>
 
 </html>
