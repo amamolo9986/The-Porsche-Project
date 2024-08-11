@@ -20,7 +20,7 @@ public class RacingService {
 
 	public List<Master> findByLabel(String label) {
 		if("Racing Models".equals(label)) {
-			masterRepo.findByLabel(label);
+			return masterRepo.findByLabel(label);
 		}
 		return Collections.emptyList();
 	}
