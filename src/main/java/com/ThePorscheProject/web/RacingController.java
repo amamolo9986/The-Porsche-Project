@@ -21,8 +21,7 @@ public class RacingController {
 
 	@GetMapping("/racing")
 	public String getRacing(ModelMap model) {
-		String label = "Racing Models";
-	    List<Master> masters = racingService.findByLabel(label);
+	    List<Master> masters = racingService.findByLabel("Racing Models");
 		model.put("masters", masters);
 		return "racing";
 	}
