@@ -16,12 +16,12 @@ public class FileController {
 		this.fileService = fileService;
 	}
 	
-//	@GetMapping("/process-csv")
-//	public ResponseEntity<String> processCsv() {
-//		fileService.readBannerFile();
-//		fileService.readDescriptionFile();
-//		fileService.readMasterFile();
-//		return ResponseEntity.ok("CSV processing successful!");
-//	}
+	@GetMapping("/process-csv")
+	public ResponseEntity<String> processCsv() {
+		fileService.readBannerFile();
+		fileService.readDescriptionFile();
+		fileService.readMasterFile();
+		return ResponseEntity.ok("CSV processing successful!");
+	}
 
 }
