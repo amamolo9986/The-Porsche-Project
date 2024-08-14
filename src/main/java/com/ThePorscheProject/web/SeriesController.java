@@ -1,7 +1,8 @@
 package com.ThePorscheProject.web;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,6 +49,12 @@ public class SeriesController {
 
 	@GetMapping("/series/{seriesName}/{seriesCategory}")
     public String findBySeriesCategory(ModelMap model, @PathVariable String seriesName, @PathVariable String seriesCategory) {
+		
+//		System.out.println("Encoded seriesCategory: " + seriesCategory);
+//		// Decode the seriesCategory from the URL encoding
+//	    String decodedSeriesCategory = URLDecoder.decode(seriesCategory, StandardCharsets.UTF_8);
+//	    System.out.println("Decoded seriesCategory: " + decodedSeriesCategory);
+	    
 		List<Master> masters = masterService.findBySeriesCategory(seriesCategory);
 		SeriesBanner seriesBanner = seriesBannerService.findBySeriesName(seriesName);
 		model.put("masters", masters);
