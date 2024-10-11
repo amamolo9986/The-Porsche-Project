@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "modelDescription")
@@ -19,17 +20,22 @@ public class ModelDescription {
 	private String description;
 	private String photo;
 	
+	@Transient
+    private String encodedSeriesCategory;
+	
 	public ModelDescription() {
 		
 	}
 
-	public ModelDescription(Integer id, String seriesName, String seriesCategory, String description, String photo) {
+	public ModelDescription(Integer id, String seriesName, String seriesCategory, String description, String photo,
+			String encodedSeriesCategory) {
 		super();
 		this.id = id;
 		this.seriesName = seriesName;
 		this.seriesCategory = seriesCategory;
 		this.description = description;
 		this.photo = photo;
+		this.encodedSeriesCategory = encodedSeriesCategory;
 	}
 
 	public Integer getId() {
@@ -72,10 +78,19 @@ public class ModelDescription {
 		this.photo = photo;
 	}
 
+	public String getEncodedSeriesCategory() {
+		return encodedSeriesCategory;
+	}
+
+	public void setEncodedSeriesCategory(String encodedSeriesCategory) {
+		this.encodedSeriesCategory = encodedSeriesCategory;
+	}
+
 	@Override
 	public String toString() {
 		return "ModelDescription [id=" + id + ", seriesName=" + seriesName + ", seriesCategory=" + seriesCategory
 				+ ", description=" + description + ", photo=" + photo + "]";
 	}
+	
 
 }
