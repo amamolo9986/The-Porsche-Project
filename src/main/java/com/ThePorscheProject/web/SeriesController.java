@@ -1,6 +1,6 @@
 package com.ThePorscheProject.web;
 
-import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -42,6 +42,13 @@ public class SeriesController {
 	public String findBySeriesName(ModelMap model, @PathVariable String seriesName) {
 		SeriesBanner seriesBanner = seriesBannerService.findBySeriesName(seriesName);
 		List<ModelDescription> modelDescriptions = modelDescriptionSerice.findModelDescriptionsBySeriesName(seriesName);
+		
+		for (ModelDescription description : modelDescriptions) {
+	        String originalCategory = description.getSeriesCategory();
+	        String encodedCategory = URLEncoder.encode(originalCategory, StandardCharsets.UTF_8);
+	        description.setEncodedSeriesCategory(encodedCategory); // Set the encoded category
+	    }
+		
 		model.put("seriesBanner", seriesBanner);
 		model.put("modelDescriptions", modelDescriptions);
 		return "seriesCategory";

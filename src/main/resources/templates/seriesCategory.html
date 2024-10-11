@@ -15,7 +15,7 @@
         <h2 th:text="${modelDescriptions.seriesCategory}">Category Name</h2>
         <p th:text="${modelDescriptions.description}">Category Description</p>
         <a th:href="@{/series/{seriesName}/{seriesCategory}(seriesName=${seriesBanner.seriesName},
-            seriesCategory=${modelDescriptions.seriesCategory})}">
+            seriesCategory=${modelDescriptions.encodedSeriesCategory})}">
             <img th:src="@{${modelDescriptions.photo}}" alt="Image" />
         </a>
     </div> <br/>
